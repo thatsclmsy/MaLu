@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>MaLu – Für dich ❤️</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Eine kleine, liebevoll animierte Seite – nur für dich. ❤️" />
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
 
   <style>
@@ -32,7 +29,6 @@
       flex-direction: column;
     }
 
-    /* Navigation */
     header {
       position: sticky;
       top: 0;
@@ -115,7 +111,6 @@
       width: 100%;
     }
 
-    /* Layout */
     main {
       flex: 1;
       display: flex;
@@ -138,7 +133,6 @@
       .nav { flex-direction: column; align-items: flex-start; }
     }
 
-    /* Hero */
     .hero {
       padding: 2rem;
       background: rgba(17, 24, 39, 0.85);
@@ -182,7 +176,6 @@
       box-shadow: 0 14px 35px rgba(255, 111, 181, 0.55);
     }
 
-    /* Visual Card */
     .visual-card {
       padding: 2rem;
       border-radius: 20px;
@@ -194,7 +187,6 @@
       overflow: visible;
     }
 
-    /* Orbit Ring */
     .orbit {
       width: 80%;
       aspect-ratio: 1 / 1;
@@ -213,7 +205,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Ebby Body */
     .ebby {
       width: 60%;
       aspect-ratio: 1 / 1;
@@ -245,7 +236,6 @@
       50% { box-shadow: 0 0 70px rgba(255, 111, 181, 1); }
     }
 
-    /* Ebby Face */
     .ebby-face {
       position: absolute;
       inset: 22% 18%;
@@ -309,7 +299,6 @@
       opacity: 0.85;
     }
 
-    /* Speech Bubble */
     .bubble {
       position: absolute;
       top: -40px;
@@ -326,7 +315,6 @@
       transition: opacity 0.3s ease;
     }
 
-    /* Hearts */
     .heart {
       position: absolute;
       font-size: 1.4rem;
@@ -411,7 +399,6 @@
       bubble.style.opacity = 1;
       setTimeout(() => bubble.style.opacity = 0, 1500);
 
-      // Herz erzeugen
       const heart = document.createElement("div");
       heart.classList.add("heart");
       heart.innerHTML = "💗";
