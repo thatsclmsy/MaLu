@@ -25,10 +25,40 @@
       background: radial-gradient(circle at top, #1f2937 0, #050816 45%, #000 100%);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
     }
 
+    /* STARTSCREEN */
+    #startscreen {
+      position: fixed;
+      inset: 0;
+      background: #050816;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      animation: fadeOut 1.6s ease forwards;
+      animation-delay: 2.2s;
+    }
+
+    #startscreen h1 {
+      font-family: "Dancing Script", cursive;
+      font-size: 3rem;
+      color: var(--accent-soft);
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* NAVIGATION */
     header {
       position: sticky;
       top: 0;
@@ -61,24 +91,6 @@
       color: #050816;
     }
 
-    .nav-title {
-      display: flex;
-      flex-direction: column;
-      margin-left: 0.6rem;
-    }
-
-    .nav-title-main {
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      font-size: 1rem;
-      text-transform: uppercase;
-    }
-
-    .nav-title-sub {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
     .nav-links {
       display: flex;
       gap: 1.4rem;
@@ -96,31 +108,53 @@
       color: var(--text);
     }
 
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
+    /* SECRET MENU */
+    #secretMenu {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--card);
+      padding: 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.4s ease;
+      pointer-events: none;
+    }
+
+    #secretMenu.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    #secretMenu p {
+      margin-bottom: 0.6rem;
+      color: var(--accent-soft);
+      font-weight: 600;
+    }
+
+    #secretMenu button {
       background: var(--accent);
-      transition: width 0.2s ease;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      color: #050816;
+      font-weight: 600;
+      margin-top: 0.4rem;
     }
 
-    .nav-link:hover::after {
-      width: 100%;
-    }
-
+    /* MAIN LAYOUT */
     main {
-      flex: 1;
-      display: flex;
-      justify-content: center;
+      max-width: 1100px;
+      margin: 0 auto;
       padding: 2rem 1.2rem 3rem;
     }
 
     .container {
-      max-width: 1100px;
-      width: 100%;
       display: grid;
       grid-template-columns: 1.4fr 1fr;
       gap: 2.4rem;
@@ -129,10 +163,9 @@
 
     @media (max-width: 900px) {
       .container { grid-template-columns: 1fr; }
-      header { position: static; }
-      .nav { flex-direction: column; align-items: flex-start; }
     }
 
+    /* HERO */
     .hero {
       padding: 2rem;
       background: rgba(17, 24, 39, 0.85);
@@ -155,27 +188,7 @@
       margin-bottom: 1.6rem;
     }
 
-    .btn {
-      border-radius: 999px;
-      padding: 0.7rem 1.4rem;
-      font-size: 0.95rem;
-      border: none;
-      cursor: pointer;
-      margin-right: 0.6rem;
-      transition: 0.2s;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
-      color: #050816;
-      box-shadow: 0 10px 25px rgba(255, 111, 181, 0.4);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 35px rgba(255, 111, 181, 0.55);
-    }
-
+    /* EBBY CARD */
     .visual-card {
       padding: 2rem;
       border-radius: 20px;
@@ -184,7 +197,6 @@
       border: 1px solid rgba(148, 163, 184, 0.25);
       text-align: center;
       position: relative;
-      overflow: visible;
     }
 
     .orbit {
@@ -197,7 +209,6 @@
       align-items: center;
       justify-content: center;
       animation: orbit-spin 12s linear infinite;
-      position: relative;
     }
 
     @keyframes orbit-spin {
@@ -219,6 +230,12 @@
         0 0 80px rgba(124, 58, 237, 0.6);
       position: relative;
       cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    /* Ebby reacts to mouse movement */
+    .ebby:hover {
+      transform: scale(1.05);
     }
 
     @keyframes float {
@@ -236,11 +253,11 @@
       50% { box-shadow: 0 0 70px rgba(255, 111, 181, 1); }
     }
 
+    /* Ebby Face */
     .ebby-face {
       position: absolute;
       inset: 22% 18%;
       border-radius: 50%;
-      background: radial-gradient(circle at 50% 0%, #ffeef8 0, #f9d7f0 40%, #f3bde6 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -287,18 +304,19 @@
       border: 2px solid #111827;
       border-top: none;
       margin-top: 2px;
-      position: relative;
     }
 
-    .ebby-mouth::before {
-      content: "";
-      position: absolute;
-      inset: 2px 4px;
-      border-radius: 999px;
-      background: #ef4444;
-      opacity: 0.85;
+    /* Emotion states */
+    .happy .ebby-mouth {
+      border-color: #16a34a;
     }
 
+    .sad .ebby-mouth {
+      border-color: #dc2626;
+      transform: rotate(180deg);
+    }
+
+    /* Speech Bubble */
     .bubble {
       position: absolute;
       top: -40px;
@@ -315,6 +333,7 @@
       transition: opacity 0.3s ease;
     }
 
+    /* Hearts */
     .heart {
       position: absolute;
       font-size: 1.4rem;
@@ -328,6 +347,36 @@
       100% { transform: translateY(-120px) scale(1.8); opacity: 0; }
     }
 
+    /* GALLERY */
+    #gallery {
+      margin-top: 3rem;
+    }
+
+    #gallery h2 {
+      font-family: "Dancing Script", cursive;
+      font-size: 2.4rem;
+      color: var(--accent-soft);
+      margin-bottom: 1rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
     footer {
       padding: 1rem;
       text-align: center;
@@ -338,21 +387,29 @@
 </head>
 
 <body>
+
+  <!-- STARTSCREEN -->
+  <div id="startscreen">
+    <h1>Für dich, MaLu ❤️</h1>
+  </div>
+
+  <!-- SECRET MENU -->
+  <div id="secretMenu">
+    <p>Geheimes Menü</p>
+    <button onclick="changeEmotion('happy')">Ebby glücklich</button>
+    <button onclick="changeEmotion('sad')">Ebby traurig</button>
+    <button onclick="changeEmotion('neutral')">Ebby normal</button>
+  </div>
+
   <header>
     <nav class="nav">
       <div style="display:flex;align-items:center;">
         <div class="logo-circle">M</div>
-        <div class="nav-title">
-          <span class="nav-title-main">MaLu</span>
-          <span class="nav-title-sub">Nur für dich ❤️</span>
-        </div>
       </div>
 
       <div class="nav-links">
         <a class="nav-link" href="#home">Home</a>
-        <a class="nav-link" href="blog.html">Blog</a>
         <a class="nav-link" href="#gallery">Galerie</a>
-        <a class="nav-link" href="#contact">Kontakt</a>
       </div>
     </nav>
   </header>
@@ -363,15 +420,13 @@
         <h1 class="hero-title">Für dich, MaLu ❤️</h1>
         <p class="hero-text">
           Diese Seite ist nur für dich.  
-          Ich kann sie jederzeit erweitern – mit Bildern, Blog‑Einträgen, kleinen Nachrichten.
+          Ich kann sie jederzeit erweitern – mit Bildern, kleinen Nachrichten und Ebby.
         </p>
-
-        <button class="btn btn-primary" onclick="location.href='blog.html'">Zum Blog</button>
       </section>
 
       <section class="visual-card">
         <div class="orbit">
-          <div class="ebby" onclick="ebbyClick(event)">
+          <div class="ebby" id="ebby" onclick="ebbyClick(event)">
             <div class="bubble" id="bubble">Ich mag dich 💗</div>
 
             <div class="ebby-face">
@@ -387,6 +442,18 @@
         <p style="margin-top:1rem;">Ebby passt auf diese kleine Ecke des Internets auf – und auf dich.</p>
       </section>
     </div>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+      <h2>Galerie</h2>
+      <div class="gallery-grid">
+        <img src="https://picsum.photos/300?random=1">
+        <img src="https://picsum.photos/300?random=2">
+        <img src="https://picsum.photos/300?random=3">
+        <img src="https://picsum.photos/300?random=4">
+        <img src="https://picsum.photos/300?random=5">
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -394,6 +461,23 @@
   </footer>
 
   <script>
+    /* SECRET MENU ACTIVATION */
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "m") {
+        document.getElementById("secretMenu").classList.toggle("visible");
+      }
+    });
+
+    /* EBBY EMOTIONS */
+    function changeEmotion(type) {
+      const ebby = document.getElementById("ebby");
+      ebby.classList.remove("happy", "sad");
+
+      if (type === "happy") ebby.classList.add("happy");
+      if (type === "sad") ebby.classList.add("sad");
+    }
+
+    /* EBBY CLICK */
     function ebbyClick(e) {
       const bubble = document.getElementById("bubble");
       bubble.style.opacity = 1;
@@ -408,9 +492,17 @@
       heart.style.top = (rect.top + rect.height / 2) + "px";
 
       document.body.appendChild(heart);
-
       setTimeout(() => heart.remove(), 1400);
     }
+
+    /* EBBY MOUSE REACTION */
+    document.addEventListener("mousemove", (e) => {
+      const ebby = document.getElementById("ebby");
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      ebby.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+    });
   </script>
+
 </body>
 </html>
