@@ -53,7 +53,7 @@
     @keyframes fadeIn { to { opacity: 1; } }
     @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
 
-    /* FADE-IN SECTIONS */
+    /* FADE-IN */
     .fade-in {
       opacity: 0;
       transform: translateY(10px);
@@ -105,7 +105,6 @@
       color: var(--muted);
       text-decoration: none;
       font-size: 0.95rem;
-      position: relative;
       transition: 0.2s;
     }
 
@@ -170,7 +169,7 @@
       margin-bottom: 0.5rem;
     }
 
-    /* MAIN LAYOUT */
+    /* MAIN */
     main {
       max-width: 1100px;
       margin: 0 auto;
@@ -357,55 +356,10 @@
       100% { transform: translateY(-120px) scale(1.8); opacity: 0; }
     }
 
-    /* SCORE */
     #scoreBox {
       margin-top: 0.6rem;
       font-size: 0.85rem;
       color: var(--muted);
-    }
-
-    /* GALLERY */
-    #gallery { margin-top: 3rem; }
-
-    #gallery h2 {
-      font-family: "Dancing Script", cursive;
-      font-size: 2.4rem;
-      color: var(--accent-soft);
-      margin-bottom: 1rem;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-    }
-
-    .gallery-grid img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      transition: 0.3s ease;
-      cursor: pointer;
-    }
-
-    .gallery-grid img:hover { transform: scale(1.05); }
-
-    /* LIGHTBOX */
-    #lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9998;
-    }
-
-    #lightbox img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 16px;
-      box-shadow: var(--shadow);
     }
 
     footer {
@@ -439,11 +393,6 @@
     <p>Wenn du das hier siehst, hast du das richtige Passwort eingegeben. Du bist wichtig. Und diese Ecke des Internets gehört dir.</p>
   </div>
 
-  <!-- LIGHTBOX -->
-  <div id="lightbox" onclick="closeLightbox()">
-    <img id="lightboxImg" src="" alt="Bild">
-  </div>
-
   <header>
     <nav class="nav">
       <div style="display:flex;align-items:center;">
@@ -452,7 +401,6 @@
 
       <div class="nav-links">
         <a class="nav-link" href="#home">Home</a>
-        <a class="nav-link" href="#gallery">Galerie</a>
       </div>
     </nav>
   </header>
@@ -463,7 +411,7 @@
         <h1 class="hero-title">Für dich, MaLu ❤️</h1>
         <p class="hero-text">
           Diese Seite ist nur für dich.  
-          Ich kann sie jederzeit erweitern – mit Bildern, kleinen Nachrichten und Ebby.
+          Ich kann sie jederzeit erweitern – mit kleinen Nachrichten und Ebby.
         </p>
       </section>
 
@@ -486,18 +434,6 @@
         <div id="scoreBox">Herzen gesammelt: <span id="score">0</span></div>
       </section>
     </div>
-
-    <!-- GALLERY -->
-    <section id="gallery" class="fade-in">
-      <h2>Galerie</h2>
-      <div class="gallery-grid">
-        <img src="https://picsum.photos/600?random=1" onclick="openLightbox(this.src)">
-        <img src="https://picsum.photos/600?random=2" onclick="openLightbox(this.src)">
-        <img src="https://picsum.photos/600?random=3" onclick="openLightbox(this.src)">
-        <img src="https://picsum.photos/600?random=4" onclick="openLightbox(this.src)">
-        <img src="https://picsum.photos/600?random=5" onclick="openLightbox(this.src)">
-      </div>
-    </section>
   </main>
 
   <footer>
@@ -515,7 +451,7 @@
     ];
     let score = 0;
 
-    /* SECRET MENU ACTIVATION (Taste M) + Passwortbereich (Taste L optional) */
+    /* SECRET MENU ACTIVATION */
     document.addEventListener("keydown", (e) => {
       if (e.key === "m") {
         document.getElementById("secretMenu").classList.toggle("visible");
@@ -548,7 +484,7 @@
       if (type === "sad") ebby.classList.add("sad");
     }
 
-    /* EBBY CLICK – Chat + Minispiel */
+    /* EBBY CLICK */
     function ebbyClick(e) {
       const bubble = document.getElementById("bubble");
       const phrase = ebbyPhrases[Math.floor(Math.random() * ebbyPhrases.length)];
@@ -575,22 +511,4 @@
     document.addEventListener("mousemove", (e) => {
       const ebby = document.getElementById("ebby");
       const x = (e.clientX / window.innerWidth - 0.5) * 10;
-      const y = (e.clientY / window.innerHeight - 0.5) * 10;
-      ebby.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
-    });
-
-    /* LIGHTBOX */
-    function openLightbox(src) {
-      const lb = document.getElementById("lightbox");
-      const img = document.getElementById("lightboxImg");
-      img.src = src;
-      lb.style.display = "flex";
-    }
-
-    function closeLightbox() {
-      document.getElementById("lightbox").style.display = "none";
-    }
-  </script>
-
-</body>
-</html>
+      const
