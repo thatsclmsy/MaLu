@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>MaLu – Für dich ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #050816;
+      --accent: #ff6fb5;
+      --accent-soft: #ff9fd0;
+      --text: #f5f5f5;
+      --muted: #b0b3c5;
+      --card: #111827;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #050816 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* STARTSCREEN */
+    #startscreen {
+      position: fixed;
+      inset: 0;
+      background: #050816;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      animation: fadeOut 1.6s ease forwards;
+      animation-delay: 2.2s;
+    }
+
+    #startscreen h1 {
+      font-family: "Dancing Script", cursive;
+      font-size: 3rem;
+      color: var(--accent-soft);
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+
+    /* FADE-IN SECTIONS */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: sectionFade 0.8s ease forwards;
+    }
+    @keyframes sectionFade {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* NAVIGATION */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: rgba(5, 8, 22, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #fff 0, #ff6fb5 35%, #7c3aed 100%);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Dancing Script", cursive;
+      font-size: 1.3rem;
+      color: #050816;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      position: relative;
+      transition: 0.2s;
+    }
+
+    .nav-link:hover { color: var(--text); }
+
+    /* SECRET MENU */
+    #secretMenu {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--card);
+      padding: 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.4s ease;
+      pointer-events: none;
+      font-size: 0.85rem;
+    }
+
+    #secretMenu.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    #secretMenu p {
+      margin-bottom: 0.6rem;
+      color: var(--accent-soft);
+      font-weight: 600;
+    }
+
+    #secretMenu button {
+      background: var(--accent);
+      border: none;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      cursor: pointer;
+      color: #050816;
+      font-weight: 600;
+      margin: 0.2rem 0.1rem;
+    }
+
+    /* PASSWORD AREA */
+    #secretArea {
+      max-width: 1100px;
+      margin: 1rem auto 0;
+      padding: 1rem 1.2rem;
+      border-radius: 16px;
+      background: rgba(17,24,39,0.9);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    #secretArea h2 {
+      font-family: "Dancing Script", cursive;
+      font-size: 2rem;
+      color: var(--accent-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    /* MAIN LAYOUT */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.2rem 3rem;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 2.4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .container { grid-template-columns: 1fr; }
+    }
+
+    /* HERO */
+    .hero {
+      padding: 2rem;
+      background: rgba(17, 24, 39, 0.85);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .hero-title {
+      font-family: "Dancing Script", cursive;
+      font-size: 2.8rem;
+      color: var(--accent-soft);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-text {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.6rem;
+    }
+
+    /* EBBY CARD */
+    .visual-card {
+      padding: 2rem;
+      border-radius: 20px;
+      background: radial-gradient(circle at top, #1f2937 0, #050816 60%);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      text-align: center;
+      position: relative;
+    }
+
+    .orbit {
+      width: 80%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 255, 255, 0.15);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: orbit-spin 12s linear infinite;
+    }
+
+    @keyframes orbit-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .ebby {
+      width: 60%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #fff 0, #ffe4f3 25%, #ff6fb5 55%, #7c3aed 100%);
+      animation:
+        float 4s ease-in-out infinite,
+        wiggle 1.5s ease-in-out infinite,
+        glow 3s ease-in-out infinite;
+      box-shadow:
+        0 0 40px rgba(255, 111, 181, 0.8),
+        0 0 80px rgba(124, 58, 237, 0.6);
+      position: relative;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .ebby:hover { transform: scale(1.05); }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(2.5deg); }
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 40px rgba(255, 111, 181, 0.8); }
+      50% { box-shadow: 0 0 70px rgba(255, 111, 181, 1); }
+    }
+
+    .ebby-face {
+      position: absolute;
+      inset: 22% 18%;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+
+    .ebby-eyes {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .eye {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #111827;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
+      position: relative;
+      animation: blink 6s infinite;
+    }
+
+    @keyframes blink {
+      0%, 90%, 100% { transform: scaleY(1); }
+      92% { transform: scaleY(0.1); }
+    }
+
+    .eye::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #fff;
+      opacity: 0.9;
+    }
+
+    .ebby-mouth {
+      width: 26px;
+      height: 14px;
+      border-radius: 0 0 999px 999px;
+      border: 2px solid #111827;
+      border-top: none;
+      margin-top: 2px;
+    }
+
+    .happy .ebby-mouth { border-color: #16a34a; }
+    .sad .ebby-mouth { border-color: #dc2626; transform: rotate(180deg); }
+
+    .bubble {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      color: #050816;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 1.4rem;
+      color: var(--accent-soft);
+      animation: fly 1.4s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fly {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-120px) scale(1.8); opacity: 0; }
+    }
+
+    /* SCORE */
+    #scoreBox {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* GALLERY */
+    #gallery { margin-top: 3rem; }
+
+    #gallery h2 {
+      font-family: "Dancing Script", cursive;
+      font-size: 2.4rem;
+      color: var(--accent-soft);
+      margin-bottom: 1rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery-grid img:hover { transform: scale(1.05); }
+
+    /* LIGHTBOX */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9998;
+    }
+
+    #lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    footer {
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- STARTSCREEN -->
+  <div id="startscreen">
+    <h1>Für dich, MaLu ❤️</h1>
+  </div>
+
+  <!-- SECRET MENU -->
+  <div id="secretMenu">
+    <p>Geheimes Menü (Taste M)</p>
+    <button onclick="changeEmotion('happy')">Ebby glücklich</button>
+    <button onclick="changeEmotion('sad')">Ebby traurig</button>
+    <button onclick="changeEmotion('neutral')">Ebby normal</button>
+    <button onclick="toggleSecretArea()">MaLu‑Bereich</button>
+  </div>
+
+  <!-- PASSWORD AREA -->
+  <div id="secretArea">
+    <h2>Nur für MaLu 💗</h2>
+    <p>Wenn du das hier siehst, hast du das richtige Passwort eingegeben. Du bist wichtig. Und diese Ecke des Internets gehört dir.</p>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <img id="lightboxImg" src="" alt="Bild">
+  </div>
+
+  <header>
+    <nav class="nav">
+      <div style="display:flex;align-items:center;">
+        <div class="logo-circle">M</div>
+      </div>
+
+      <div class="nav-links">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#gallery">Galerie</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="hero fade-in" id="home">
+        <h1 class="hero-title">Für dich, MaLu ❤️</h1>
+        <p class="hero-text">
+          Diese Seite ist nur für dich.  
+          Ich kann sie jederzeit erweitern – mit Bildern, kleinen Nachrichten und Ebby.
+        </p>
+      </section>
+
+      <section class="visual-card fade-in">
+        <div class="orbit">
+          <div class="ebby" id="ebby" onclick="ebbyClick(event)">
+            <div class="bubble" id="bubble">Ich mag dich 💗</div>
+
+            <div class="ebby-face">
+              <div class="ebby-eyes">
+                <div class="eye"></div>
+                <div class="eye"></div>
+              </div>
+              <div class="ebby-mouth"></div>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top:1rem;">Ebby passt auf diese kleine Ecke des Internets auf – und auf dich.</p>
+        <div id="scoreBox">Herzen gesammelt: <span id="score">0</span></div>
+      </section>
+    </div>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="fade-in">
+      <h2>Galerie</h2>
+      <div class="gallery-grid">
+        <img src="https://picsum.photos/600?random=1" onclick="openLightbox(this.src)">
+        <img src="https://picsum.photos/600?random=2" onclick="openLightbox(this.src)">
+        <img src="https://picsum.photos/600?random=3" onclick="openLightbox(this.src)">
+        <img src="https://picsum.photos/600?random=4" onclick="openLightbox(this.src)">
+        <img src="https://picsum.photos/600?random=5" onclick="openLightbox(this.src)">
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Mit ❤️ gebaut – und jederzeit erweiterbar.
+  </footer>
+
+  <script>
+    const ebbyPhrases = [
+      "Ich mag dich 💗",
+      "Du bist wichtig.",
+      "Ich pass auf dich auf.",
+      "Diese Ecke gehört dir.",
+      "Du bist nicht allein.",
+      "Ich freu mich, dass du da bist."
+    ];
+    let score = 0;
+
+    /* SECRET MENU ACTIVATION (Taste M) + Passwortbereich (Taste L optional) */
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "m") {
+        document.getElementById("secretMenu").classList.toggle("visible");
+      }
+      if (e.key === "l") {
+        toggleSecretArea();
+      }
+    });
+
+    function toggleSecretArea() {
+      const area = document.getElementById("secretArea");
+      if (area.style.display === "block") {
+        area.style.display = "none";
+        return;
+      }
+      const pw = prompt("Passwort für MaLu eingeben:");
+      if (!pw) return;
+      if (pw.trim().toLowerCase() === "malu") {
+        area.style.display = "block";
+      } else {
+        alert("Falsches Passwort.");
+      }
+    }
+
+    /* EBBY EMOTIONS */
+    function changeEmotion(type) {
+      const ebby = document.getElementById("ebby");
+      ebby.classList.remove("happy", "sad");
+      if (type === "happy") ebby.classList.add("happy");
+      if (type === "sad") ebby.classList.add("sad");
+    }
+
+    /* EBBY CLICK – Chat + Minispiel */
+    function ebbyClick(e) {
+      const bubble = document.getElementById("bubble");
+      const phrase = ebbyPhrases[Math.floor(Math.random() * ebbyPhrases.length)];
+      bubble.textContent = phrase;
+      bubble.style.opacity = 1;
+      setTimeout(() => bubble.style.opacity = 0, 1800);
+
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💗";
+
+      const rect = e.target.getBoundingClientRect();
+      heart.style.left = (rect.left + rect.width / 2) + "px";
+      heart.style.top = (rect.top + rect.height / 2) + "px";
+
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1400);
+
+      score++;
+      document.getElementById("score").textContent = score;
+    }
+
+    /* EBBY MOUSE REACTION */
+    document.addEventListener("mousemove", (e) => {
+      const ebby = document.getElementById("ebby");
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      ebby.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+    });
+
+    /* LIGHTBOX */
+    function openLightbox(src) {
+      const lb = document.getElementById("lightbox");
+      const img = document.getElementById("lightboxImg");
+      img.src = src;
+      lb.style.display = "flex";
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
