@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Eine kleine, liebevoll animierte Seite – nur für dich. ❤️" />
 
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
 
   <style>
@@ -177,7 +178,7 @@
       transform: translateY(-1px);
     }
 
-    /* Ebby */
+    /* Ebby Animation */
     .visual-card {
       padding: 1.4rem;
       border-radius: 18px;
@@ -187,19 +188,32 @@
       text-align: center;
     }
 
+    .ebby-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
     .ebby {
       width: 58%;
       aspect-ratio: 1 / 1;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 20%, #fff 0, #ffe4f3 25%, #ff6fb5 55%, #7c3aed 100%);
-      margin: 0 auto 1rem;
-      animation: float 4.5s ease-in-out infinite;
-      box-shadow: 0 0 40px rgba(255, 111, 181, 0.8);
+      animation: float 4s ease-in-out infinite, wiggle 1.5s ease-in-out infinite;
+      box-shadow:
+        0 0 40px rgba(255, 111, 181, 0.8),
+        0 0 80px rgba(124, 58, 237, 0.6);
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(2deg); }
     }
 
     footer {
@@ -244,7 +258,9 @@
       </section>
 
       <section class="visual-card">
-        <div class="ebby"></div>
+        <div class="ebby-wrapper">
+          <div class="ebby"></div>
+        </div>
         <p>Ebby passt auf diese kleine Ecke des Internets auf – und auf dich.</p>
       </section>
     </div>
