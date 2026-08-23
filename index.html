@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meine Familie ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      text-align: center;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* --- Himmel Hintergrund --- */
+    body {
+      background: linear-gradient(to bottom, #87CEEB, #FFDAB9);
+    }
+
+    /* --- Wolken --- */
+    .cloud {
+      position: absolute;
+      background: #ffffff;
+      width: 180px;
+      height: 70px;
+      border-radius: 50px;
+      opacity: 0.8;
+      animation: moveClouds 40s linear infinite;
+      z-index: 0;
+    }
+
+    .cloud:before,
+    .cloud:after {
+      content: "";
+      position: absolute;
+      background: #ffffff;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      top: -25px;
+    }
+
+    .cloud:before { left: 15px; }
+    .cloud:after { right: 15px; }
+
+    @keyframes moveClouds {
+      0% { transform: translateX(-250px); }
+      100% { transform: translateX(120vw); }
+    }
+
+    .cloud1 { top: 15%; animation-duration: 45s; }
+    .cloud2 { top: 30%; animation-duration: 38s; }
+    .cloud3 { top: 50%; animation-duration: 50s; }
+    .cloud4 { top: 65%; animation-duration: 60s; }
+
+    /* --- animierter Sonnenuntergang am Meer --- */
+    .sun {
+      position: absolute;
+      top: 8%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, #ffdd55, #ff7e5f);
+      border-radius: 50%;
+      animation: sunGlow 4s ease-in-out infinite;
+      box-shadow: 0 0 80px rgba(255,200,100,0.9);
+      z-index: 1;
+    }
+
+    @keyframes sunGlow {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+      100% { transform: scale(1); }
+    }
+
+    .ocean {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 45%;
+      background: linear-gradient(to top, #1e3c72, #2a5298);
+      animation: oceanMove 6s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes oceanMove {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(12px); }
+      100% { transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+      z-index: 10;
+    }
+
+    /* --- Überarbeiteter Cartoon-Hund Ebby --- */
+    .dog {
+      position: relative;
+      width: 180px;
+      height: 160px;
+      margin-top: 40px;
+      animation: float 4s ease-in-out infinite,
+                 wag 0.6s ease-in-out infinite alternate,
+                 bounce 2s ease-in-out infinite;
+      z-index: 10;
+    }
+
+    .dog-head {
+      position: absolute;
+      top: 0;
+      left: 50px;
+      width: 90px;
+      height: 90px;
+      background: #f2d3a2;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(255,255,255,0.5);
+    }
+
+    .ear {
+      position: absolute;
+      width: 35px;
+      height: 45px;
+      background: #e5c28b;
+      border-radius: 50%;
+      top: -12px;
+    }
+
+    .ear.left { left: 20px; transform: rotate(-18deg); }
+    .ear.right { right: 20px; transform: rotate(18deg); }
+
+    .eye {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: black;
+      border-radius: 50%;
+      top: 32px;
+    }
+
+    .eye.left { left: 25px; }
+    .eye.right { right: 25px; }
+
+    .nose {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: black;
+      border-radius: 50%;
+      top: 55px;
+      left: 37px;
+    }
+
+    .dog-body {
+      position: absolute;
+      bottom: 0;
+      left: 30px;
+      width: 130px;
+      height: 80px;
+      background: #f2d3a2;
+      border-radius: 50px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.5);
+    }
+
+    .tail {
+      position: absolute;
+      right: -15px;
+      top: 25px;
+      width: 35px;
+      height: 25px;
+      background: #e5c28b;
+      border-radius: 50%;
+      animation: tailWag 0.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes tailWag {
+      0% { transform: rotate(12deg); }
+      100% { transform: rotate(-12deg); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes wag {
+      0% { transform: rotate(-2deg); }
+      100% { transform: rotate(2deg); }
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      30% { transform: translateY(-20px); }
+      60% { transform: translateY(0); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sonne -->
+  <div class="sun"></div>
+
+  <!-- Wolken -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+  <div class="cloud cloud4"></div>
+
+  <!-- Meer -->
+  <div class="ocean"></div>
+
+  <h1>Meine Familie ❤️</h1>
+
+  <!-- Cartoon-Hund Ebby -->
+  <div class="dog">
+    <div class="dog-head">
+      <div class="ear left"></div>
+      <div class="ear right"></div>
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="nose"></div>
+    </div>
+    <div class="dog-body">
+      <div class="tail"></div>
+    </div>
+  </div>
+
+</body>
+</html>
