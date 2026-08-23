@@ -182,7 +182,7 @@
       box-shadow: 0 14px 35px rgba(255, 111, 181, 0.55);
     }
 
-    /* Ebby Animation */
+    /* Visual Card */
     .visual-card {
       padding: 2rem;
       border-radius: 20px;
@@ -191,7 +191,7 @@
       border: 1px solid rgba(148, 163, 184, 0.25);
       text-align: center;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
     }
 
     /* Orbit Ring */
@@ -205,6 +205,7 @@
       align-items: center;
       justify-content: center;
       animation: orbit-spin 12s linear infinite;
+      position: relative;
     }
 
     @keyframes orbit-spin {
@@ -212,7 +213,7 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Ebby */
+    /* Ebby Body */
     .ebby {
       width: 60%;
       aspect-ratio: 1 / 1;
@@ -225,6 +226,8 @@
       box-shadow:
         0 0 40px rgba(255, 111, 181, 0.8),
         0 0 80px rgba(124, 58, 237, 0.6);
+      position: relative;
+      cursor: pointer;
     }
 
     @keyframes float {
@@ -240,6 +243,95 @@
     @keyframes glow {
       0%, 100% { box-shadow: 0 0 40px rgba(255, 111, 181, 0.8); }
       50% { box-shadow: 0 0 70px rgba(255, 111, 181, 1); }
+    }
+
+    /* Ebby Face */
+    .ebby-face {
+      position: absolute;
+      inset: 22% 18%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 0%, #ffeef8 0, #f9d7f0 40%, #f3bde6 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+
+    .ebby-eyes {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .eye {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #111827;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
+      position: relative;
+    }
+
+    .eye::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #fff;
+      opacity: 0.9;
+    }
+
+    .ebby-mouth {
+      width: 26px;
+      height: 14px;
+      border-radius: 0 0 999px 999px;
+      border: 2px solid #111827;
+      border-top: none;
+      margin-top: 2px;
+      position: relative;
+    }
+
+    .ebby-mouth::before {
+      content: "";
+      position: absolute;
+      inset: 2px 4px;
+      border-radius: 999px;
+      background: #ef4444;
+      opacity: 0.85;
+    }
+
+    /* Speech Bubble */
+    .bubble {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      color: #050816;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Hearts */
+    .heart {
+      position: absolute;
+      font-size: 1.4rem;
+      color: var(--accent-soft);
+      animation: fly 1.4s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fly {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-120px) scale(1.8); opacity: 0; }
     }
 
     footer {
@@ -285,8 +377,19 @@
 
       <section class="visual-card">
         <div class="orbit">
-          <div class="ebby"></div>
+          <div class="ebby" onclick="ebbyClick(event)">
+            <div class="bubble" id="bubble">Ich mag dich 💗</div>
+
+            <div class="ebby-face">
+              <div class="ebby-eyes">
+                <div class="eye"></div>
+                <div class="eye"></div>
+              </div>
+              <div class="ebby-mouth"></div>
+            </div>
+          </div>
         </div>
+
         <p style="margin-top:1rem;">Ebby passt auf diese kleine Ecke des Internets auf – und auf dich.</p>
       </section>
     </div>
@@ -295,5 +398,26 @@
   <footer>
     Mit ❤️ gebaut – und jederzeit erweiterbar.
   </footer>
+
+  <script>
+    function ebbyClick(e) {
+      const bubble = document.getElementById("bubble");
+      bubble.style.opacity = 1;
+      setTimeout(() => bubble.style.opacity = 0, 1500);
+
+      // Herz erzeugen
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💗";
+
+      const rect = e.target.getBoundingClientRect();
+      heart.style.left = (rect.left + rect.width / 2) + "px";
+      heart.style.top = (rect.top + rect.height / 2) + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 1400);
+    }
+  </script>
 </body>
 </html>
