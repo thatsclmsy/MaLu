@@ -253,6 +253,7 @@
       position: relative;
       cursor: pointer;
       transition: 0.3s ease;
+      pointer-events: auto;
     }
 
     .ebby:hover { transform: scale(1.05); }
@@ -443,12 +444,17 @@
   <script>
     const ebbyPhrases = [
       "Ich mag dich 💗",
-      "Du bist wichtig.",
+      "Du bist wichtig für mich.",
       "Ich pass auf dich auf.",
       "Diese Ecke gehört dir.",
       "Du bist nicht allein.",
-      "Ich freu mich, dass du da bist."
+      "Ich freu mich, dass du da bist.",
+      "Du bist etwas Besonderes.",
+      "Ich lächle, wenn du klickst.",
+      "Ich bin immer hier.",
+      "Du machst diese Seite schöner."
     ];
+
     let score = 0;
 
     /* SECRET MENU ACTIVATION */
@@ -507,8 +513,8 @@
       document.getElementById("score").textContent = score;
     }
 
-    /* EBBY MOUSE REACTION */
+    /* EBBY MOUSE REACTION — FIXED */
     document.addEventListener("mousemove", (e) => {
       const ebby = document.getElementById("ebby");
-      const x = (e.clientX / window.innerWidth - 0.5) * 10;
-      const
+      const x = (e.clientX / window.innerWidth - 0.5) * 6;
+      const y = (e.clientY / window.innerHeight - 0.5) *
