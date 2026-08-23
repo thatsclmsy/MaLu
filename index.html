@@ -52,8 +52,8 @@
     }
 
     .logo-circle {
-      width: 34px;
-      height: 34px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 20%, #fff 0, #ff6fb5 35%, #7c3aed 100%);
       box-shadow: var(--shadow);
@@ -61,7 +61,7 @@
       align-items: center;
       justify-content: center;
       font-family: "Dancing Script", cursive;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #050816;
     }
 
@@ -74,7 +74,7 @@
     .nav-title-main {
       font-weight: 700;
       letter-spacing: 0.08em;
-      font-size: 0.9rem;
+      font-size: 1rem;
       text-transform: uppercase;
     }
 
@@ -85,14 +85,15 @@
 
     .nav-links {
       display: flex;
-      gap: 1.2rem;
+      gap: 1.4rem;
     }
 
     .nav-link {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       position: relative;
+      transition: 0.2s;
     }
 
     .nav-link:hover {
@@ -127,7 +128,7 @@
       width: 100%;
       display: grid;
       grid-template-columns: 1.4fr 1fr;
-      gap: 2rem;
+      gap: 2.4rem;
       align-items: center;
     }
 
@@ -139,68 +140,88 @@
 
     /* Hero */
     .hero {
-      padding: 1.6rem;
+      padding: 2rem;
       background: rgba(17, 24, 39, 0.85);
-      border-radius: 18px;
+      border-radius: 20px;
       box-shadow: var(--shadow);
       border: 1px solid rgba(148, 163, 184, 0.25);
     }
 
     .hero-title {
       font-family: "Dancing Script", cursive;
-      font-size: 2.4rem;
+      font-size: 2.8rem;
       color: var(--accent-soft);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.6rem;
     }
 
     .hero-text {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 1.4rem;
+      line-height: 1.7;
+      margin-bottom: 1.6rem;
     }
 
     .btn {
       border-radius: 999px;
-      padding: 0.6rem 1.2rem;
-      font-size: 0.9rem;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.95rem;
       border: none;
       cursor: pointer;
       margin-right: 0.6rem;
+      transition: 0.2s;
     }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-soft));
       color: #050816;
+      box-shadow: 0 10px 25px rgba(255, 111, 181, 0.4);
     }
 
     .btn-primary:hover {
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 35px rgba(255, 111, 181, 0.55);
     }
 
     /* Ebby Animation */
     .visual-card {
-      padding: 1.4rem;
-      border-radius: 18px;
+      padding: 2rem;
+      border-radius: 20px;
       background: radial-gradient(circle at top, #1f2937 0, #050816 60%);
       box-shadow: var(--shadow);
       border: 1px solid rgba(148, 163, 184, 0.25);
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .ebby-wrapper {
-      width: 100%;
+    /* Orbit Ring */
+    .orbit {
+      width: 80%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 255, 255, 0.15);
+      margin: 0 auto;
       display: flex;
+      align-items: center;
       justify-content: center;
-      margin-bottom: 1rem;
+      animation: orbit-spin 12s linear infinite;
     }
 
+    @keyframes orbit-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Ebby */
     .ebby {
-      width: 58%;
+      width: 60%;
       aspect-ratio: 1 / 1;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 20%, #fff 0, #ffe4f3 25%, #ff6fb5 55%, #7c3aed 100%);
-      animation: float 4s ease-in-out infinite, wiggle 1.5s ease-in-out infinite;
+      animation:
+        float 4s ease-in-out infinite,
+        wiggle 1.5s ease-in-out infinite,
+        glow 3s ease-in-out infinite;
       box-shadow:
         0 0 40px rgba(255, 111, 181, 0.8),
         0 0 80px rgba(124, 58, 237, 0.6);
@@ -208,12 +229,17 @@
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+      50% { transform: translateY(-14px); }
     }
 
     @keyframes wiggle {
       0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(2deg); }
+      50% { transform: rotate(2.5deg); }
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 40px rgba(255, 111, 181, 0.8); }
+      50% { box-shadow: 0 0 70px rgba(255, 111, 181, 1); }
     }
 
     footer {
@@ -258,10 +284,10 @@
       </section>
 
       <section class="visual-card">
-        <div class="ebby-wrapper">
+        <div class="orbit">
           <div class="ebby"></div>
         </div>
-        <p>Ebby passt auf diese kleine Ecke des Internets auf – und auf dich.</p>
+        <p style="margin-top:1rem;">Ebby passt auf diese kleine Ecke des Internets auf – und auf dich.</p>
       </section>
     </div>
   </main>
